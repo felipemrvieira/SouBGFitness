@@ -20,7 +20,9 @@
 
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyA9zbkLP2QugNXdRNBxRc4GbvlpRLV0JMA"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyA9zbkLP2QugNXdRNBxRc4GbvlpRLV0JMA&v=3&libraries=geometry"></script>
+
+
     <!-- endbuild -->
   </head>
   <body>
@@ -44,9 +46,18 @@
         <h3 class="text-muted">SouBgFitness</h3>
       </div>
 
+      <div class="alert alert-warning alert-dismissible fade show hide" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="alert-heading">Ooooops!</h4>
+        <div>Parece que você está muito distante da academia! <div id="location">Sua Localização aparece aqui!</div>
+</div >
+
+      </div>
+
       <div class="jumbotron">
-        <h1 class="display-3">'Allo, 'Allo!</h1>
-        <p id="location">Sua Localização aparece aqui!</p>
+        <h1 class="display-3">SOU BG FITNESS!</h1>
         <p><a id="checkIn" class="btn btn-lg btn-success" href="#">Realizar checkin!</a></p>
       </div>
 

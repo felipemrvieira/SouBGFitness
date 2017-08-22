@@ -1,5 +1,6 @@
-console.log('\'Allo \'Allo!');
 var x = document.getElementById("location");
+var latlonbg = new google.maps.LatLng(-9.620370, -35.738493);
+
 
 $("#checkIn").click(function(){
     getLocation();
@@ -24,20 +25,25 @@ function getLocation() {
 function showPosition(position) {
   var lat = position.coords.latitude;
   var lon = position.coords.longitude;
-  var latlon = new google.maps.LatLng(lat, lon)
-  var mapholder = document.getElementById('map-area')
+  var latlon = new google.maps.LatLng(lat, lon);
+  var mapholder = document.getElementById('map-area');
+
+
   mapholder.style.height = '400px';
   mapholder.style.width = '100%';
 
   var myOptions = {
-  center:latlon,zoom:17 ,
-  mapTypeId:google.maps.MapTypeId.ROADMAP,
-  mapTypeControl:false,
-  navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
+    scrollwheel: false,
+    center:latlon,zoom:15,
+    mapTypeId:google.maps.MapTypeId.ROADMAP,
+    mapTypeControl:false,
+    navigationControlOptions:{style:google.maps.NavigationControlStyle.SMALL}
   }
 
   var map = new google.maps.Map(document.getElementById("map-area"), myOptions);
   var marker = new google.maps.Marker({position:latlon,map:map,title:"Você está aqui!"});
+
+  verificaDistancia(latlon);
   closeModal();
 }
 
@@ -56,4 +62,15 @@ function showError(error) {
       x.innerHTML = "Ocorreu um erro desconhecido."
       break;
   }
+}
+
+function verificaDistancia(latlon){
+  var distanciaBruta = google.maps.geometry.spherical.computeDistanceBetween(latlon, latlonbg)/1000;
+  var distanciaFinal = parseFloat(distanciaBruta.toFixed(2));
+  if (distanciaFinal > 0.5) {
+    $("#alert-label").text("Voce está " + distanciaFinal +" km distante da academia");
+    $(".alert").removeClass("hide");
+  }
+
+
 }
